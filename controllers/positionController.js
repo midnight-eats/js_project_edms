@@ -7,19 +7,24 @@ async function getPositions(req, res) {
 }
 
 async function positionGet(req, res) {
-  const { error } = req.query;
   const positions = await db.getAllPositions(); 
+
+  res.render("index", { items: positions });
+}
+
+async function positionFormGet(req, res) {
+  const { error } = req.query;
 
   const errorMessage = ERROR_MESSAGES[error] || null;
 
-  res.render("index", { items: positions, error: errorMessage });
+  res.render("position_form", { error: errorMessage });
 }
 
 async function positionPost(req, res) {
-  const { item } = req.body;
+  const { name } = req.body;
   
   try {
-    await db.insertPosition(item);
+    await db.insertPosition(name);
     res.redirect("/positions");
   } catch (error) {
     let errorParam = null;
@@ -33,12 +38,7 @@ async function positionPost(req, res) {
 
     console.log(error.code);
     
-    res.redirect(`/positions?error=${errorParam}`);
-    /*const positions = await db.getAllPositions();
-    res.render("index", { 
-      items: positions,
-      error: errorMessage 
-    });*/
+    res.redirect(`/positions/form?error=${errorParam}`);
   }
 }
 
@@ -54,6 +54,7 @@ async function deletePosition(req, res) {
 module.exports = {
   getPositions,
   positionGet,
+  positionFormGet,
   positionPost,
   deletePosition
 };

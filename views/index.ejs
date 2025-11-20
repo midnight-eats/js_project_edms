@@ -3,19 +3,7 @@
     <title>Homepage</title>
     <script src="/scripts.js" defer></script>
   </head>
-  <body>
-    <dialog class="modal">
-      <form action="/positions/new" method="POST">
-        <label for="itemName">Название должности:</label>
-        <input type="text" name="item" id="itemName">
-        <button type="submit">Submit</button>
-      </form>
-    </dialog>
-
-    <% if (error) { %>
-      <p><%= error %></p>
-    <% } %>
-    
+  <body>   
     <% if (items && items.length > 0) { %>
       <table>
         <thead>
@@ -32,8 +20,8 @@
                 <td><%= item[key] %></td>
               <% } %>
               <td>
-                <button class="edit-btn">Редактировать</button>
-                <button class="delete-btn" data-id="<%= item.id %>">Удалить</button>
+                <button class="editBtn">Редактировать</button>
+                <button class="deleteBtn" data-id="<%= item.id %>">Удалить</button>
               </td>
             </tr>
           <% }); %>
@@ -44,7 +32,7 @@
     <% } %>
 
     <div>
-      <button class="create-btn">Создать</button>
+      <button class="createBtn">Создать</button>
     </div>
   </body>
 </html>

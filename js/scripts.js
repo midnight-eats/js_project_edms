@@ -1,4 +1,6 @@
-const deleteButtons = document.querySelectorAll('.delete-btn');
+const deleteButtons = document.querySelectorAll('.deleteBtn');
+const modal = document.querySelector('.modal');
+const openModal = document.querySelector('.createBtn');
 
 deleteButtons.forEach(button => {
   button.addEventListener('click', (event) => {
@@ -8,11 +10,8 @@ deleteButtons.forEach(button => {
   });
 });
 
-const modal = document.querySelector('.modal');
-const openModal = document.querySelector('.create-btn');
-
 openModal.addEventListener('click', () => {
-  modal.showModal();
+  window.location.href = "/positions/form";
 })
 
 async function deleteItem(id) {

@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>Homepage</title>
+  </head>
+  <body>
+    <form action="/positions/form/create" method="POST">
+      <label for="nameInput">Название должности:</label>
+      <input type="text" name="name" id="nameInput">
+      <button type="submit">Сохранить</button>
+      <% if (error) { %>
+        <p><%= error %></p>
+      <% } %>
+    </form>
+  </body>
+</html>
