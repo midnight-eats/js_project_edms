@@ -9,7 +9,7 @@ async function getPositions(req, res) {
 async function positionGet(req, res) {
   const positions = await db.getAllPositions(); 
 
-  res.render("index", { items: positions });
+  res.render("positions", { items: positions });
 }
 
 async function positionFormGet(req, res) {
@@ -17,7 +17,7 @@ async function positionFormGet(req, res) {
 
   const errorMessage = ERROR_MESSAGES[error] || null;
 
-  res.render("position_form", { error: errorMessage });
+  res.render("position_form", { name: null, error: errorMessage });
 }
 
 async function positionPost(req, res) {
@@ -36,14 +36,46 @@ async function positionPost(req, res) {
       errorParam = ERROR_TYPES.INVALID_FORMAT;
     }
 
-    console.log(error.code);
-    
     res.redirect(`/positions/form?error=${errorParam}`);
   }
 }
 
-async function editPosition(req, res) {
-  res.redirect("/positions");
+async function editPositionFormGet(req, res) {
+  const id = req.params.id;
+  const position = await db.getPositionById(id); 
+  const name = position.name;
+  
+  const { error } = req.query;
+  const errorMessage = ERROR_MESSAGES[error] || null;
+
+  res.render("position_form", { name: name, error: errorMessage });
+}
+
+async function editPositionFormPost(req, res) {
+  const id = req.params.id;
+  const { name } = req.body;
+  const position = await db.getPositionById(id);
+
+  if (position.name === name) {
+    res.redirect("/positions");
+    return;
+  }
+  
+  try {
+    await db.editPositionById(id, name);
+    res.redirect("/positions");
+  } catch (error) {
+    let errorParam = null;
+
+    if (error.code === 'P2002') {
+      errorParam = ERROR_TYPES.POSITION_EXISTS;
+    }
+    else {
+      errorParam = ERROR_TYPES.INVALID_FORMAT;
+    }
+
+    res.redirect(`/positions/form/${id}?error=${errorParam}`);
+  }
 }
 
 async function deletePosition(req, res) {
@@ -56,5 +88,7 @@ module.exports = {
   positionGet,
   positionFormGet,
   positionPost,
+  editPositionFormGet,
+  editPositionFormPost,
   deletePosition
 };

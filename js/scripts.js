@@ -1,20 +1,27 @@
-const deleteButtons = document.querySelectorAll('.deleteBtn');
-const modal = document.querySelector('.modal');
-const openModal = document.querySelector('.createBtn');
+const deleteBtns = document.querySelectorAll('.deleteBtn');
+const editBtns = document.querySelectorAll('.editBtn');
+const formCreate = document.querySelector('.createBtn');
 
-deleteButtons.forEach(button => {
-  button.addEventListener('click', (event) => {
-    const clickedButton = event.target;
-    const id = clickedButton.getAttribute('data-id');
+deleteBtns.forEach(btn => {
+  btn.addEventListener('click', (event) => {
+    const clickedBtn = event.target;
+    const id = clickedBtn.getAttribute('data-id');
     deleteItem(id);
   });
 });
 
-openModal.addEventListener('click', () => {
+editBtns.forEach(btn => {
+  btn.addEventListener('click', (event) => {
+    const clickedBtn = event.target;
+    const id = clickedBtn.getAttribute('data-id');
+    window.location.href = `/positions/form/${id}`;
+  });
+});
+
+formCreate.addEventListener('click', () => {
   window.location.href = "/positions/form";
 })
 
 async function deleteItem(id) {
-  console.log(id);
   window.location.href = `/positions/${id}/delete`;
 }

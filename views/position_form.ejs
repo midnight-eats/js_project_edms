@@ -1,11 +1,12 @@
 <html>
   <head>
     <title>Homepage</title>
+    <script src="/position_script.js" defer></script>
   </head>
   <body>
-    <form action="/positions/form/create" method="POST">
+    <form method="POST">
       <label for="nameInput">Название должности:</label>
-      <input type="text" name="name" id="nameInput">
+      <input type="text" value="<%= name || '' %>" name="name" id="nameInput">
       <button type="submit">Сохранить</button>
       <% if (error) { %>
         <p><%= error %></p>

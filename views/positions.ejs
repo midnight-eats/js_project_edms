@@ -20,7 +20,7 @@
                 <td><%= item[key] %></td>
               <% } %>
               <td>
-                <button class="editBtn">Редактировать</button>
+                <button class="editBtn" data-id="<%= item.id %>">Редактировать</button>
                 <button class="deleteBtn" data-id="<%= item.id %>">Удалить</button>
               </td>
             </tr>
@@ -28,7 +28,7 @@
         </tbody>
       </table>
     <% } else { %>
-      <p class="no-data">No items found.</p>
+      <p class="noData">No items found.</p>
     <% } %>
 
     <div>
