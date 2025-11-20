@@ -1,4 +1,4 @@
-const db = require("../db/queries");
+const db = require("../db/position_queries");
 const { ERROR_TYPES, ERROR_MESSAGES } = require('../js/constants');
 
 async function getPositions(req, res) {
@@ -28,8 +28,8 @@ async function positionPost(req, res) {
     res.redirect("/positions");
   } catch (error) {
     let errorParam = null;
-
-    if (error.code === 'P2002') {
+    console.log(error.code);
+    if (error.name === 'SequelizeUniqueConstraintError') {
       errorParam = ERROR_TYPES.POSITION_EXISTS;
     }
     else {
@@ -67,7 +67,7 @@ async function editPositionFormPost(req, res) {
   } catch (error) {
     let errorParam = null;
 
-    if (error.code === 'P2002') {
+    if (error.name === 'SequelizeUniqueConstraintError') {
       errorParam = ERROR_TYPES.POSITION_EXISTS;
     }
     else {

@@ -16,9 +16,6 @@ app.use("/positions", positionRouter);
 
 const PORT = 3000;
 app.listen(PORT, (error) => {
-  // This is important!
-  // Without this, any startup errors will silently fail
-  // instead of giving you a helpful error message.
   if (error) {
     throw error;
   }
