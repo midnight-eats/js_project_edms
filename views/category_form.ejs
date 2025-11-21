@@ -1,12 +1,12 @@
 <html>
   <head>
     <title>Homepage</title>
-    <script src="/position_script.js" defer></script>
+    <script src="/category_script.js" defer></script>
   </head>
   <body>
     <%- include('navbar'); %>
     <form method="POST">
-      <label for="nameInput">Название должности:</label>
+      <label for="nameInput">Название категории:</label>
       <input type="text" value="<%= name || '' %>" name="name" id="nameInput">
       <button type="submit">Сохранить</button>
       <% if (error) { %>

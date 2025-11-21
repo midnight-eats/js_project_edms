@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <title>Homepage</title>
+    <script src="/categories.js" defer></script>
+  </head>
+  <body>
+    <%- include('navbar'); %>
+    <h1>Категории</h1>
+    <%- include('table', { items : items }); %>
+  </body>
+</html>

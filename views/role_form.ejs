@@ -4,6 +4,7 @@
     <script src="/role_script.js" defer></script>
   </head>
   <body>
+    <%- include('navbar'); %>
     <form method="POST">
       <label for="nameInput">Название роли:</label>
       <input type="text" value="<%= name || '' %>" name="name" id="nameInput">
